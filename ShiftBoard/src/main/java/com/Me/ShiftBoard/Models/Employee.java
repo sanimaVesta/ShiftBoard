@@ -1,4 +1,4 @@
-package com.Me.ShiftBoard.Model;
+package com.Me.ShiftBoard.Models;
 
 import com.querydsl.core.annotations.QueryEntity;
 import lombok.AllArgsConstructor;
@@ -8,6 +8,9 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 @Document(collection = "Employee")
@@ -30,6 +33,11 @@ public class Employee {
     private Address address;
     private long departmentId;
 
+    private HashMap<LocalDate,Long> schedule = new HashMap<>();
+    private List<Long> leaves = new ArrayList<>();
+
+
     public final static List<String> properties = List.of("firstName","lastName","externalId","email","contactNumber","country","city","state","zipCode","departmentId");
+
 
 }

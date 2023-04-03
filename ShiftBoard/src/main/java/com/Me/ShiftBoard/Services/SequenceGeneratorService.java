@@ -1,4 +1,4 @@
-package com.Me.ShiftBoard.Service;
+package com.Me.ShiftBoard.Services;
 
 import static org.springframework.data.mongodb.core.FindAndModifyOptions.options;
 import static org.springframework.data.mongodb.core.query.Criteria.where;
@@ -6,8 +6,7 @@ import static org.springframework.data.mongodb.core.query.Query.query;
 
 import java.util.Objects;
 
-import com.Me.ShiftBoard.Model.DatabaseSequence;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.Me.ShiftBoard.Models.DatabaseSequence;
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Service;

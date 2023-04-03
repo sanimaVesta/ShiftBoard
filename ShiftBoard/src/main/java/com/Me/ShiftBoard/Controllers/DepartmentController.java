@@ -1,8 +1,7 @@
 package com.Me.ShiftBoard.Controllers;
 
-import com.Me.ShiftBoard.Model.Department;
-import com.Me.ShiftBoard.Model.Employee;
-import com.Me.ShiftBoard.Service.DepartmentService;
+import com.Me.ShiftBoard.Models.Department;
+import com.Me.ShiftBoard.Services.Department.DepartmentService;
 import com.Me.ShiftBoard.UtilityClasses.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

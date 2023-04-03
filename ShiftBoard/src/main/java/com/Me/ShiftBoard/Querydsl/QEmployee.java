@@ -2,7 +2,7 @@ package com.Me.ShiftBoard.Querydsl;
 
 import static com.querydsl.core.types.PathMetadataFactory.*;
 
-import com.Me.ShiftBoard.Model.Employee;
+import com.Me.ShiftBoard.Models.Employee;
 import com.querydsl.core.types.dsl.*;
 
 import com.querydsl.core.types.PathMetadata;
@@ -38,6 +38,10 @@ public class QEmployee extends EntityPathBase<Employee> {
     public final NumberPath<Long> id = createNumber("id", Long.class);
 
     public final StringPath lastName = createString("lastName");
+
+    public final ListPath<Long, NumberPath<Long>> leaves = this.<Long, NumberPath<Long>>createList("leaves", Long.class, NumberPath.class, PathInits.DIRECT2);
+
+    public final MapPath<java.time.LocalDate, Long, NumberPath<Long>> schedule = this.<java.time.LocalDate, Long, NumberPath<Long>>createMap("schedule", java.time.LocalDate.class, Long.class, NumberPath.class);
 
     public QEmployee(String variable) {
         this(Employee.class, forVariable(variable), INITS);

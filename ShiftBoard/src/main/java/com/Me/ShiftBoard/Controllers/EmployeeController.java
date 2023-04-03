@@ -1,9 +1,7 @@
 package com.Me.ShiftBoard.Controllers;
 
-import com.Me.ShiftBoard.Model.Employee;
-import com.Me.ShiftBoard.Repository.EmployeeRespository;
-import com.Me.ShiftBoard.Service.EmployeeService;
-import com.Me.ShiftBoard.Service.SequenceGeneratorService;
+import com.Me.ShiftBoard.Models.Employee;
+import com.Me.ShiftBoard.Services.Employee.EmployeeService;
 import com.Me.ShiftBoard.UtilityClasses.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

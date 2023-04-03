@@ -1,12 +1,10 @@
-package com.Me.ShiftBoard.Service;
+package com.Me.ShiftBoard.Services.Employee;
 
-import com.Me.ShiftBoard.Model.Employee;
 import com.Me.ShiftBoard.Querydsl.QEmployee;
 import com.Me.ShiftBoard.UtilityClasses.Criteria;
 import com.querydsl.core.BooleanBuilder;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 

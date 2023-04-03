@@ -1,7 +1,6 @@
-package com.Me.ShiftBoard.Repository;
+package com.Me.ShiftBoard.Repositorys;
 
-import com.Me.ShiftBoard.Model.Department;
-import com.Me.ShiftBoard.Service.DepartmentService;
+import com.Me.ShiftBoard.Models.Department;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 
@@ -12,5 +11,7 @@ public interface DepartmentRepository  extends MongoRepository<Department,Intege
     Department findDepartmentByDepartmentId(long departmentId);
 
     Department deleteDepartmentByDepartmentId(long departmentId);
+
+
 
 }

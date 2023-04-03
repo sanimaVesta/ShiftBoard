@@ -1,12 +1,14 @@
-package com.Me.ShiftBoard.Service;
+package com.Me.ShiftBoard.Services.Department;
 
-import com.Me.ShiftBoard.Model.Department;
-import com.Me.ShiftBoard.Model.Employee;
-import com.Me.ShiftBoard.Repository.DepartmentRepository;
+import com.Me.ShiftBoard.Models.Department;
+import com.Me.ShiftBoard.Models.Employee;
+import com.Me.ShiftBoard.Repositorys.DepartmentRepository;
+import com.Me.ShiftBoard.Services.Employee.EmployeeService;
+import com.Me.ShiftBoard.Services.SequenceGeneratorService;
 import com.Me.ShiftBoard.UtilityClasses.Response;
 import com.Me.ShiftBoard.UtilityClasses.Status;
 import com.querydsl.core.BooleanBuilder;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -14,15 +16,16 @@ import java.util.List;
 import java.util.Map;
 
 @Service
+@RequiredArgsConstructor
 public class DepartmentService {
 
 
-    @Autowired
-    DepartmentRepository departmentRepository;
-    @Autowired
-    EmployeeService employeeService;
-    @Autowired
-    SequenceGeneratorService sequenceGeneratorService;
+
+    private final DepartmentRepository departmentRepository;
+
+    private final EmployeeService employeeService;
+
+    private final SequenceGeneratorService sequenceGeneratorService;
 
 
     public boolean transferEmployee(Long newDept, Employee tmp)

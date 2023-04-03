@@ -1,4 +1,4 @@
-package com.Me.ShiftBoard.Model;
+package com.Me.ShiftBoard.Models;
 
 import lombok.Data;
 import org.springframework.data.annotation.Id;

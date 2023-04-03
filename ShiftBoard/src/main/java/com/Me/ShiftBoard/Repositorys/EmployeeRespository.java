@@ -1,10 +1,8 @@
-package com.Me.ShiftBoard.Repository;
+package com.Me.ShiftBoard.Repositorys;
 
-import com.Me.ShiftBoard.Model.Employee;
+import com.Me.ShiftBoard.Models.Employee;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.querydsl.QuerydslPredicateExecutor;
-
-import java.util.List;
 
 public interface EmployeeRespository  extends MongoRepository<Employee,Integer> , QuerydslPredicateExecutor<Employee>{
     boolean existsByExternalId(long externalId);

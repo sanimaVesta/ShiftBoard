@@ -1,32 +1,31 @@
-package com.Me.ShiftBoard.Service;
+package com.Me.ShiftBoard.Services.Employee;
 
-import com.Me.ShiftBoard.Model.Employee;
-import com.Me.ShiftBoard.Repository.DepartmentRepository;
-import com.Me.ShiftBoard.Repository.EmployeeRespository;
-import com.Me.ShiftBoard.UtilityClasses.Criteria;
+import com.Me.ShiftBoard.Models.Employee;
+import com.Me.ShiftBoard.Repositorys.EmployeeRespository;
+import com.Me.ShiftBoard.Services.Department.DepartmentService;
+import com.Me.ShiftBoard.Services.SequenceGeneratorService;
 import com.Me.ShiftBoard.UtilityClasses.Response;
 import com.Me.ShiftBoard.UtilityClasses.Status;
 import com.querydsl.core.BooleanBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
-import org.springframework.expression.Operation;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.SplittableRandom;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.*;
 
 @Service
 public class EmployeeService {
 
     @Autowired
-    SequenceGeneratorService sequenceGeneratorService;
+    private SequenceGeneratorService sequenceGeneratorService;
     @Autowired
-    EmployeeRespository employeeRespository;
+    private EmployeeRespository employeeRespository;
     @Lazy
     @Autowired
-    DepartmentService departmentService;
+    private DepartmentService departmentService;
 
 
 
@@ -40,11 +39,20 @@ public class EmployeeService {
 
         }else{
             employee.setId(sequenceGeneratorService.generateSequence(Employee.SEQUENCE_NAME));
+            Calendar cal = Calendar.getInstance();
+            HashMap<LocalDate, Long> schedule = employee.getSchedule();
+            for(int i = Calendar.SUNDAY; i <= Calendar.SATURDAY; i++) {
+                cal.set(Calendar.DAY_OF_WEEK, i);
+                schedule.put(LocalDate.from(LocalDateTime.ofInstant(cal.toInstant(), ZoneId.systemDefault())), (long) -1);
+            }
+
+            employee.setSchedule(schedule);
             employeeRespository.save(employee);
 
             if(departmentService.addEmployeeInDepartment(employee.getExternalId(),employee.getDepartmentId()))
             {
                 response.setOperationStatus(Status.Success,employee);
+
             } else{
                 employeeRespository.deleteEmployeeByExternalId(employee.getExternalId());
                 response.setOperationStatus(Status.Failure,"Cannot add employee to the mentioned department!");
@@ -151,6 +159,26 @@ public class EmployeeService {
 
 
 
+//    @Scheduled(cron = "0 0 * * 0")
+//    public void updateScheduleWeekly()
+//    {
+//        List<Employee> employees = employeeRespository.findAll();
+//
+//
+//        employees.forEach(employee -> {
+//
+//                HashMap<LocalDate,Long> s = employee.getSchedule();
+//                HashMap<LocalDate,Long> r = new HashMap<>();
+//                s.forEach(((date, aLong) -> {
+//                    r.put(date.plusDays(7),aLong);
+//                }));
+//
+//                employee.setSchedule(r);
+//                employeeRespository.save(employee);
+//        });
+//
+//    }
+
 
 
 
@@ -166,9 +194,11 @@ public class EmployeeService {
         return employeeRespository.existsByExternalId(eId);
     }
 
-    public Employee saveEmployee(Employee e)
+    public Employee  saveEmployee(Employee e)
     {
         return  employeeRespository.save(e);
     }
+
+    public List<Employee> getEmployeesForOtherService(){return employeeRespository.findAll();}
 
 }

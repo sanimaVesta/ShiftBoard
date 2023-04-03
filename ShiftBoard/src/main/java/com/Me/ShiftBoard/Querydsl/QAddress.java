@@ -2,7 +2,7 @@ package com.Me.ShiftBoard.Querydsl;
 
 import static com.querydsl.core.types.PathMetadataFactory.*;
 
-import com.Me.ShiftBoard.Model.Address;
+import com.Me.ShiftBoard.Models.Address;
 import com.querydsl.core.types.dsl.*;
 
 import com.querydsl.core.types.PathMetadata;
